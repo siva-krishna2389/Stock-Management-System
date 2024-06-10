@@ -1,0 +1,60 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.0'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+	id 'org.sonarqube' version '3.2.0'
+}
+
+group = 'com.trainingapps.sms.reportms'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url 'https://repo.spring.io/milestone' }
+}
+ext {
+	set('springCloudVersion', "2020.0.3-SNAPSHOT")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	//implementation 'org.postgresql:postgresql:42.2.20' 
+	//use only when working with HSQL.
+	implementation group: 'org.hsqldb', name: 'hsqldb', version: '2.5.0' 
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	
+	
+
+	providedRuntime group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper'
+	providedRuntime 'taglibs:standard:1.1.2'
+	providedRuntime 'javax.servlet.jsp.jstl:jstl-api:1.2'
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+	//implementation group: 'org.springframework', name: 'spring-web', version: '3.0.2.RELEASE'
+	
+	
+}
+
+test {
+	useJUnitPlatform()
+}
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
